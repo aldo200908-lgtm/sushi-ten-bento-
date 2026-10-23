@@ -219,3 +219,32 @@
 @keyframes experienceOrbit{to{transform:rotate(340deg)}}
 @media(max-width:600px){.experience-toolbar{flex-wrap:wrap}.experience-search{min-width:155px;flex:1;max-width:260px}.experience-card-image{height:145px}.experience-card{min-height:225px}.experience-spotlight-art{height:260px}.experience-card-index{top:8px;left:9px}}
 @media(prefers-reduced-motion:reduce){.experience-card,.experience-card-image img,.experience-spotlight-art img,.experience-orbit,.experience-spotlight-art::before,.experience-spotlight-art::after{animation:none!important;transition:none!important;transform:none!important}}
+
+/* Luxury rounded edges: restrained champagne hairlines and burgundy focus */
+.menu-experience{--sushi-hairline:#8f69554f;--sushi-warm:#eac8a8}
+.experience-card{border-radius:20px!important;overflow:hidden;border:1px solid var(--sushi-hairline)!important;background:linear-gradient(145deg,#231717,#100c0d);box-shadow:0 10px 30px #0007, inset 0 1px #f3c6a00b;transition:transform .38s cubic-bezier(.2,.75,.2,1),border-color .3s,box-shadow .3s}
+.experience-card-image{border-radius:19px 19px 0 0;overflow:hidden;background:radial-gradient(ellipse at 50% 75%,#55272752,#150e10 70%)}
+.experience-card-image img{border-radius:17px 17px 0 0}
+.experience-card-body{border-radius:0 0 19px 19px;background:linear-gradient(155deg,#211617,#110d0e);padding:17px 17px 18px}
+.experience-card-name{color:#f8e8d6;letter-spacing:.01em}
+.experience-card-jp{color:#c49b80}
+.experience-card-hint{color:#dcae92}
+.experience-card:hover{border-color:#d6a17c99!important;box-shadow:0 18px 36px #000a,0 0 19px #ac5b4630}
+.experience-card.is-active{border-color:#ef8b7e!important;box-shadow:0 0 0 1px #d86b68a8,0 0 19px #ce45543d,0 20px 40px #0009}
+.experience-card.is-active .experience-card-body{border-top-color:#d78a7a8a}
+.experience-spotlight{border-radius:26px!important;overflow:hidden;border:1px solid #9d715b88!important;background:radial-gradient(ellipse at 55% 35%,#592a2c40,transparent 62%),linear-gradient(145deg,#221719,#100d0e);box-shadow:0 22px 50px #0008,inset 0 1px #eac3a319}
+.experience-spotlight-art{border-radius:22px;overflow:hidden;background:radial-gradient(ellipse at 50% 50%,#662d3240,transparent 70%)}
+.experience-spotlight-art img{border-radius:18px}
+.experience-spotlight h3{color:#fff0df}
+.experience-spotlight-label{color:#dcb294}
+.experience-tab,.experience-more-trigger{border-radius:999px!important;transition:background .25s,border-color .25s,box-shadow .25s,color .25s}
+.experience-category-bar .experience-tab.is-active{border-color:#d36f72!important;background:#3b1d24;box-shadow:inset 0 0 0 1px #f9b29b18,0 0 13px #d84d5030}
+.experience-more-list{border-radius:17px}
+.experience-more-list button{border-radius:11px}
+.experience-search{border-color:#80604e85;background:#1b1314;box-shadow:inset 0 1px #e8c0a20c}
+.experience-quantity{border-radius:999px;border-color:#94735e88}
+.experience-add{border-radius:999px;background:linear-gradient(125deg,#b32f42,#8d2333);border-color:#d36b70;box-shadow:0 5px 18px #a42d403d}
+.experience-add:hover{background:linear-gradient(125deg,#c84355,#a3293c)}
+.experience-cart-panel{background:#171011}
+.experience-cart-row button,.experience-cart-foot a{border-radius:13px}
+@media(max-width:600px){.experience-card{border-radius:17px!important}.experience-card-image{border-radius:16px 16px 0 0}.experience-card-image img{border-radius:15px 15px 0 0}.experience-card-body{border-radius:0 0 16px 16px;padding:12px}.experience-spotlight{border-radius:22px!important}.experience-spotlight-art{border-radius:17px}.experience-category-bar .experience-tab{border-radius:999px!important}}
