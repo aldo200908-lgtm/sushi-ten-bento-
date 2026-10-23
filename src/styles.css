@@ -259,3 +259,16 @@
 .menu-showcase-inner,.essence-calligraphy{will-change:auto}
 @media(max-width:760px){.cinema-progress{height:2px}.essence-section::before,.menu-showcase::before,.menu-experience::before,.placeholder-section::before{height:55px}.menu-showcase::after,.essence-section::after{height:65px}}
 @media(prefers-reduced-motion:reduce){.cinema-progress{display:none}html{scroll-behavior:auto}}
+
+/* Seamless cinematic bridges: no hard horizontal cuts */
+.cinema-bridge{height:clamp(55px,9vw,130px);position:relative;z-index:2;pointer-events:none;overflow:hidden;isolation:isolate;background:linear-gradient(180deg,#0a0707,#110b0c 46%,#0a0707)}
+.cinema-bridge::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 55% 75% at 50% 50%,#8c28342e,transparent 75%);opacity:.8}
+.cinema-bridge::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0a0707,transparent 30%,transparent 70%,#0a0707)}
+.cinema-bridge-line{position:absolute;left:18%;right:18%;top:50%;height:1px;transform-origin:center;background:linear-gradient(90deg,transparent,#a96c595e 24%,#e5b795 50%,#a96c595e 76%,transparent);box-shadow:0 0 13px #b63d4855}
+.cinema-bridge-hero{height:45px;background:linear-gradient(180deg,#0a0707,#0b0809)}
+.cinema-bridge-hero .cinema-bridge-line{opacity:.45}
+.cinema-bridge-essence{margin-top:-1px;background:linear-gradient(180deg,#0a0707,#160c10 48%,#0a0707)}
+.cinema-bridge-menu{height:clamp(70px,10vw,140px);background:linear-gradient(180deg,#0a0707,#1b0d12 50%,#080707)}
+.cinema-bridge-menu::before{background:radial-gradient(ellipse 65% 75% at 50% 45%,#b82d3a2a,transparent 75%)}
+@media(max-width:760px){.cinema-bridge{height:62px}.cinema-bridge-hero{height:25px}.cinema-bridge-menu{height:72px}.cinema-bridge-line{left:12%;right:12%}}
+@media(prefers-reduced-motion:reduce){.cinema-bridge-line{transform:none!important}}
