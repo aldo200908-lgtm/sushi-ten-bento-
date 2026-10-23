@@ -108,3 +108,13 @@
 .essence-photo img{-webkit-mask-image:none!important;mask-image:none!important}
 .essence-photo::after{background:linear-gradient(0deg,#0b0808,transparent 27%)!important}
 }
+
+/* Smooth transition below the feature strip: fade only the essence image at its top */
+.essence-section{position:relative;background:#0b0808!important}
+.essence-inner{position:relative}
+@media(min-width:901px){
+.essence-photo::after{background:linear-gradient(to bottom,#0b0808 0%,rgba(11,8,8,.75) 35px,transparent 125px),linear-gradient(90deg,#0b0808 0%,#0b0808 22%,rgba(11,8,8,.98) 31%,rgba(11,8,8,.86) 42%,rgba(11,8,8,.38) 63%,rgba(11,8,8,.05) 90%)!important}
+}
+@media(max-width:900px){
+.essence-photo::after{background:linear-gradient(to bottom,#0b0808 0%,rgba(11,8,8,.55) 35px,transparent 100px),linear-gradient(to top,#0b0808,transparent 27%)!important}
+}
