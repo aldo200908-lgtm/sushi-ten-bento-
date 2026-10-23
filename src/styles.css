@@ -13,3 +13,28 @@
 
 /* Prominent golden feature illustrations */
 .feature-strip{min-height:160px}.feature{gap:15px}.feature-icon{width:90px;height:90px;min-width:90px;background-color:transparent;background-size:400% 100%;background-repeat:no-repeat;filter:drop-shadow(0 0 5px #dba65a24)}@media(max-width:1200px){.feature-icon{width:70px;height:70px;min-width:70px}}@media(max-width:600px){.feature-strip{min-height:0}.feature-icon{width:64px;height:64px;min-width:64px}.feature{gap:8px}}
+
+/* Desktop composition aligned to the supplied Sushi Ten Bento reference */
+@media(min-width:1201px){
+.nav{height:108px;padding:0 clamp(34px,6.2vw,120px);gap:24px}
+.brand-logo-image{width:clamp(210px,20vw,290px);max-height:76px}
+.nav-links{position:absolute;left:50%;transform:translateX(-50%);gap:clamp(22px,2.5vw,39px)}
+.nav-links a{padding:40px 0 37px}
+.nav-right{margin-left:auto;gap:20px}
+.hero{height:min(800px,calc(100svh - 120px));min-height:670px}
+.hero-content{margin-left:clamp(50px,9.4vw,165px);padding-top:clamp(168px,20vh,225px)}
+.hero-title-image{width:min(100%,590px)}
+.hero-description{margin-top:18px}
+.hero-actions{margin-top:23px}
+.vertical-kanji{right:clamp(34px,4.8vw,80px);top:29%}
+.hero-bottom{bottom:29px}
+.feature-strip{min-height:124px;padding:18px clamp(30px,7vw,120px)}
+.feature{gap:16px;font-size:18px}
+.feature-icon{width:70px;height:70px;min-width:70px}
+}
+@media(min-width:901px) and (max-width:1200px){
+.nav-links{gap:12px;font-size:14px}
+.brand-logo-image{width:210px}
+.nav-right{gap:8px}
+.feature-icon{width:60px;height:60px;min-width:60px}
+}
