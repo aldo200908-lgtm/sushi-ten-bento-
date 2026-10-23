@@ -89,3 +89,22 @@
 .essence-photo img{-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%);mask-image:linear-gradient(to bottom,#000 0%,#000 78%,transparent 100%)}
 .essence-photo:after{background:none}
 }
+
+/* FIX: previous negative z-index placed the chef behind opaque backgrounds.
+   Keep one image at layer 0, gradient at layer 1, copy above both. */
+.essence-section{background:#0b0808!important}
+.essence-section::before{display:none!important}
+@media(min-width:901px){
+.essence-inner{position:relative;isolation:isolate;background:#0b0808;overflow:hidden}
+.essence-photo{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;z-index:0!important;box-shadow:none!important;border-radius:0!important;overflow:hidden}
+.essence-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:right center;-webkit-mask-image:none!important;mask-image:none!important}
+.essence-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0b0808 0%,#0b0808 22%,rgba(11,8,8,.98) 31%,rgba(11,8,8,.86) 42%,rgba(11,8,8,.38) 63%,rgba(11,8,8,.05) 90%)!important;pointer-events:none}
+.essence-copy{position:relative;z-index:2!important}
+.essence-calligraphy{z-index:2!important}
+}
+@media(max-width:900px){
+.essence-inner{background:#0b0808!important}
+.essence-photo{z-index:0}
+.essence-photo img{-webkit-mask-image:none!important;mask-image:none!important}
+.essence-photo::after{background:linear-gradient(0deg,#0b0808,transparent 27%)!important}
+}
