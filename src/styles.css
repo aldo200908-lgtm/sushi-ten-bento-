@@ -39,7 +39,7 @@
 }
 
 /* Nuestra esencia — optimized editorial split */
-.essence-section{position:relative;isolation:isolate;overflow:hidden;min-height:580px;background:#0b0808 url('/sushi-ten-bento-/images/nuestra-esencia-fondo.webp') center/cover no-repeat;color:#f5e9db}
+.essence-section{position:relative;isolation:isolate;overflow:hidden;min-height:580px;background:#0b0808;color:#f5e9db}
 .essence-section:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,5,5,.94) 0%,rgba(9,5,5,.86) 35%,rgba(9,5,5,.42) 70%,rgba(9,5,5,.22));z-index:-1}
 .essence-inner{display:grid;grid-template-columns:minmax(0,1fr) 65px minmax(0,1.1fr);align-items:center;gap:24px;max-width:1500px;margin:auto;padding:90px clamp(26px,8vw,145px);min-height:580px}
 .essence-copy{max-width:490px;z-index:1}.essence-kicker{font-family:Georgia,serif;font-size:13px;letter-spacing:.26em;color:#d12c36;margin:0 0 17px}.essence-kicker span{color:#bc9882;font-size:11px}.essence-copy h2{font-size:clamp(48px,5vw,82px);font-weight:400;line-height:1.05;margin:0 0 18px}.essence-copy h2 em{font-style:normal;color:#e6c7a5}.essence-rule{display:block;width:64px;height:2px;background:#b51b28;margin:0 0 26px}.essence-copy>p:not(.essence-kicker){font-size:clamp(18px,1.45vw,22px);line-height:1.45;color:#e9d8c9;margin:0 0 29px}.essence-button{display:inline-flex;align-items:center;gap:22px;background:#b71926;border-radius:30px;padding:15px 24px;font-size:17px;transition:background .2s,transform .2s}.essence-button:hover{background:#d42a37;transform:translateY(-2px)}
