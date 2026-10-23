@@ -10,3 +10,6 @@
 
 /* Four separately positioned illustrations from one transparent sprite */
 .feature-icon{display:block;flex:none;width:64px;height:64px;background-image:url('/sushi-ten-bento-/images/sushi-ten-bento-iconos.png');background-size:400% 100%;background-repeat:no-repeat;transition:transform .35s ease,filter .35s ease}.feature-icon-0{background-position:0% center}.feature-icon-1{background-position:33.333% center}.feature-icon-2{background-position:66.667% center}.feature-icon-3{background-position:100% center}.feature:hover .feature-icon{transform:translateY(-4px);filter:brightness(1.15)}@media(max-width:900px){.feature-icon{width:52px;height:52px}}@media(max-width:600px){.feature-icon{width:46px;height:46px}}
+
+/* Prominent golden feature illustrations */
+.feature-strip{min-height:160px}.feature{gap:15px}.feature-icon{width:90px;height:90px;min-width:90px;background-color:transparent;background-size:400% 100%;background-repeat:no-repeat;filter:drop-shadow(0 0 5px #dba65a24)}@media(max-width:1200px){.feature-icon{width:70px;height:70px;min-width:70px}}@media(max-width:600px){.feature-strip{min-height:0}.feature-icon{width:64px;height:64px;min-width:64px}.feature{gap:8px}}
