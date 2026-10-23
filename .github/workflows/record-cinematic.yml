@@ -21,11 +21,11 @@ jobs:
         run: |
           npm install --no-save playwright
           npx playwright install --with-deps chromium
-          sudo apt-get update && sudo apt-get install -y ffmpeg
+          sudo apt-get update && sudo apt-get install -y ffmpeg xvfb
       - name: Grabar video Full HD
         env:
           DURATION: ${{ inputs.duration }}
-        run: node scripts/record-cinematic.mjs
+        run: xvfb-run -a -s '-screen 0 1920x1080x24 -ac' node scripts/record-cinematic.mjs
       - name: Guardar MP4 para descargar
         uses: actions/upload-artifact@v4
         with:
