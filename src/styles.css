@@ -272,3 +272,32 @@
 .cinema-bridge-menu::before{background:radial-gradient(ellipse 65% 75% at 50% 45%,#b82d3a2a,transparent 75%)}
 @media(max-width:760px){.cinema-bridge{height:62px}.cinema-bridge-hero{height:25px}.cinema-bridge-menu{height:72px}.cinema-bridge-line{left:12%;right:12%}}
 @media(prefers-reduced-motion:reduce){.cinema-bridge-line{transform:none!important}}
+
+/* Three cinematic gallery scenes — replace demo photos later without redesign */
+.cinema-gallery{background:#080707;color:#f7e9da;position:relative;overflow:hidden;padding:100px 0 0;isolation:isolate}
+.cinema-gallery::before{content:"";position:absolute;top:0;left:0;right:0;height:140px;background:linear-gradient(180deg,#080707,transparent);pointer-events:none;z-index:3}
+.cinema-gallery-heading{text-align:center;max-width:800px;margin:0 auto 64px;padding:0 22px;position:relative;z-index:2}
+.cinema-gallery-kicker{font:12px/1.4 Arial,sans-serif;letter-spacing:.25em;color:#d6a079}
+.cinema-gallery-heading h2{font:500 clamp(45px,6.5vw,92px)/.98 'Cormorant Garamond',Georgia,serif;margin:19px 0 16px}
+.cinema-gallery-heading h2 em{font-weight:400;color:#d79e8d}
+.cinema-gallery-heading>p:not(.cinema-gallery-kicker){font-size:clamp(17px,2vw,22px);color:#c5aaa0}
+.cinema-gallery-note{display:inline-block;margin-top:12px;font:10px Arial,sans-serif;letter-spacing:.17em;color:#b18a75;border:1px solid #654239;border-radius:100px;padding:9px 15px}
+.cinema-gallery-scenes{display:flex;flex-direction:column;gap:clamp(20px,4vw,65px)}
+.cinema-gallery-scene{position:relative;min-height:clamp(500px,78svh,840px);overflow:hidden;display:flex;align-items:end;isolation:isolate;background:#1a1012}
+.cinema-gallery-visual{position:absolute;inset:0;z-index:-2}
+.cinema-gallery-visual img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:saturate(.78) contrast(1.07) brightness(.73)}
+.cinema-gallery-scene-one img{object-position:75% center}
+.cinema-gallery-scene-two img{object-fit:contain;object-position:68% center;background:radial-gradient(ellipse at 60% 45%,#6d313c,#160d10 70%)}
+.cinema-gallery-scene-three img{object-position:center}
+.cinema-gallery-scene::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,#080707 0%,#0a0707aa 20%,transparent 66%),linear-gradient(90deg,#09070780,transparent 70%)}
+.cinema-gallery-scene::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-top:1px solid #d2a1842b;border-bottom:1px solid #d2a1842b}
+.cinema-gallery-copy{padding:0 clamp(24px,9vw,150px) clamp(64px,10vh,120px);max-width:950px;position:relative;z-index:2}
+.cinema-gallery-copy>span{font:12px Arial,sans-serif;letter-spacing:.25em;color:#e5b38e}
+.cinema-gallery-copy h3{font:500 clamp(46px,7vw,100px)/1 'Cormorant Garamond',Georgia,serif;margin:15px 0}
+.cinema-gallery-copy p{font-size:clamp(19px,2.3vw,27px);color:#e2c5b6;margin:0}
+.cinema-gallery-outro{text-align:center;padding:85px 20px 100px;background:radial-gradient(ellipse at 50% 0%,#5b222b44,transparent 70%),#080707}
+.cinema-gallery-outro>span{font:25px 'Noto Serif JP',serif;letter-spacing:.25em;color:#cda27e}
+.cinema-gallery-outro p{font:500 clamp(32px,4vw,55px) 'Cormorant Garamond',Georgia,serif;margin:16px 0 23px}
+.cinema-gallery-outro a{font:12px Arial,sans-serif;letter-spacing:.14em;color:#e6b393;border-bottom:1px solid #ac6955;padding-bottom:6px}
+@media(max-width:700px){.cinema-gallery{padding-top:70px}.cinema-gallery-heading{margin-bottom:40px}.cinema-gallery-scene{min-height:65svh}.cinema-gallery-scene-one img{object-position:65% center}.cinema-gallery-copy{padding:0 23px 65px}.cinema-gallery-scenes{gap:18px}.cinema-gallery-outro{padding:65px 20px 75px}}
+@media(prefers-reduced-motion:reduce){.cinema-gallery-visual img{transform:none!important}}
