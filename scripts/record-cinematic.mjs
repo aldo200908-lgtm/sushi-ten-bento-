@@ -1,0 +1,31 @@
+import { chromium } from 'playwright';
+import { mkdir, readdir, rm } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
+const duration=Math.max(20,Math.min(90,Number(process.env.DURATION)||45));
+const width=1920,height=1080,fps=30;
+const url='https://aldo200908-lgtm.github.io/sushi-ten-bento-/';
+await mkdir('output/frames',{recursive:true});
+const browser=await chromium.launch({headless:true,args:['--autoplay-policy=no-user-gesture-required','--disable-background-timer-throttling','--hide-scrollbars','--force-device-scale-factor=1']});
+const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,reducedMotion:'no-preference'});
+const page=await context.newPage();
+page.on('console',msg=>{if(msg.type()==='error')console.log('Browser:',msg.text().slice(0,180))});
+await page.goto(url,{waitUntil:'networkidle',timeout:90000});
+await page.evaluate(async()=>{await document.fonts.ready;for(const img of document.images){if(img.loading==='lazy')img.loading='eager'}});
+await page.waitForTimeout(2200);
+const total=await page.evaluate(()=>document.documentElement.scrollHeight-innerHeight);
+const frames=Math.round(duration*fps);
+const lead=Math.round(2*fps),tail=Math.round(2*fps);
+for(let i=0;i<frames;i++){
+  const p=Math.max(0,Math.min(1,(i-lead)/Math.max(1,frames-lead-tail)));
+  const y=total*(p*p*(3-2*p));
+  await page.evaluate(y=>window.scrollTo({top:y,behavior:'instant'}),y);
+  await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
+  const file='output/frames/'+String(i).padStart(5,'0')+'.png';
+  await page.screenshot({path:file,animations:'allow',timeout:30000});
+  if(i%150===0)console.log('Frame',i,'/',frames);
+}
+await browser.close();
+const ff=spawnSync('ffmpeg',['-y','-framerate',String(fps),'-i','output/frames/%05d.png','-c:v','libx264','-preset','medium','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart','output/sushi-ten-bento-cinematico.mp4'],{stdio:'inherit'});
+if(ff.status!==0)throw Error('FFmpeg failed');
+await rm('output/frames',{recursive:true,force:true});
+console.log('Video listo.');
