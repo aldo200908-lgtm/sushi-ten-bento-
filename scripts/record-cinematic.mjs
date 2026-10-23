@@ -1,31 +1,82 @@
 import { chromium } from 'playwright';
-import { mkdir, readdir, rm } from 'node:fs/promises';
-import { spawnSync } from 'node:child_process';
-const duration=Math.max(20,Math.min(90,Number(process.env.DURATION)||45));
-const width=1920,height=1080,fps=30;
-const url='https://aldo200908-lgtm.github.io/sushi-ten-bento-/';
-await mkdir('output/frames',{recursive:true});
-const browser=await chromium.launch({headless:true,args:['--autoplay-policy=no-user-gesture-required','--disable-background-timer-throttling','--hide-scrollbars','--force-device-scale-factor=1']});
-const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,reducedMotion:'no-preference'});
-const page=await context.newPage();
-page.on('console',msg=>{if(msg.type()==='error')console.log('Browser:',msg.text().slice(0,180))});
-await page.goto(url,{waitUntil:'networkidle',timeout:90000});
-await page.evaluate(async()=>{await document.fonts.ready;for(const img of document.images){if(img.loading==='lazy')img.loading='eager'}});
-await page.waitForTimeout(2200);
-const total=await page.evaluate(()=>document.documentElement.scrollHeight-innerHeight);
-const frames=Math.round(duration*fps);
-const lead=Math.round(2*fps),tail=Math.round(2*fps);
-for(let i=0;i<frames;i++){
-  const p=Math.max(0,Math.min(1,(i-lead)/Math.max(1,frames-lead-tail)));
-  const y=total*(p*p*(3-2*p));
-  await page.evaluate(y=>window.scrollTo({top:y,behavior:'instant'}),y);
-  await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
-  const file='output/frames/'+String(i).padStart(5,'0')+'.png';
-  await page.screenshot({path:file,animations:'allow',timeout:30000});
-  if(i%150===0)console.log('Frame',i,'/',frames);
+import { mkdir, stat } from 'node:fs/promises';
+import { spawn } from 'node:child_process';
+
+const duration = Math.max(20, Math.min(90, Number(process.env.DURATION) || 45));
+const width = 1920, height = 1080, fps = 30;
+const url = 'https://aldo200908-lgtm.github.io/sushi-ten-bento-/';
+const output = 'output/sushi-ten-bento-cinematico.mp4';
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+await mkdir('output', { recursive: true });
+const browser = await chromium.launch({
+  headless: false,
+  args: [
+    '--kiosk', '--window-position=0,0', '--window-size=1920,1080',
+    '--autoplay-policy=no-user-gesture-required', '--disable-infobars',
+    '--hide-scrollbars', '--force-device-scale-factor=1',
+    '--disable-background-timer-throttling', '--disable-renderer-backgrounding'
+  ]
+});
+let recorder;
+try {
+  const context = await browser.newContext({
+    viewport: { width, height }, deviceScaleFactor: 1,
+    reducedMotion: 'no-preference'
+  });
+  const page = await context.newPage();
+  page.on('console', msg => {
+    if (msg.type() === 'error') console.log('Browser:', msg.text().slice(0, 180));
+  });
+  await page.goto(url, { waitUntil: 'networkidle', timeout: 90000 });
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    for (const img of document.images) if (img.loading === 'lazy') img.loading = 'eager';
+    document.documentElement.style.scrollBehavior = 'auto';
+  });
+  await page.waitForTimeout(2500);
+
+  const total = await page.evaluate(() => Math.max(0, document.documentElement.scrollHeight - innerHeight));
+  console.log('Real-time recording:', duration, 'seconds, scroll distance:', total, 'px');
+
+  recorder = spawn('ffmpeg', [
+    '-y', '-f', 'x11grab', '-framerate', String(fps),
+    '-video_size', width + 'x' + height,
+    '-i', process.env.DISPLAY || ':99',
+    '-t', String(duration),
+    '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '17',
+    '-pix_fmt', 'yuv420p', '-movflags', '+faststart', output
+  ], { stdio: ['ignore', 'ignore', 'pipe'] });
+  let ffLog = '';
+  recorder.stderr.on('data', chunk => { ffLog = (ffLog + chunk.toString()).slice(-4000); });
+  const finished = new Promise((resolve, reject) => {
+    recorder.on('error', reject);
+    recorder.on('close', code => code === 0 ? resolve() : reject(new Error('FFmpeg failed: ' + ffLog)));
+  });
+
+  // Scroll is driven by wall-clock time, not by screenshot throughput.
+  // Thus background video and GSAP run at their original speed.
+  await page.evaluate(async ({ total, duration }) => {
+    const lead = 2.5, tail = 2.5;
+    const start = performance.now();
+    await new Promise(resolve => {
+      const tick = now => {
+        const elapsed = (now - start) / 1000;
+        const p = Math.max(0, Math.min(1, (elapsed - lead) / (duration - lead - tail)));
+        const eased = p * p * (3 - 2 * p);
+        window.scrollTo({ top: total * eased, behavior: 'instant' });
+        if (elapsed < duration) requestAnimationFrame(tick);
+        else resolve();
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { total, duration });
+
+  await finished;
+  const file = await stat(output);
+  if (file.size < 100000) throw new Error('Recorded file is unexpectedly small');
+  console.log('MP4 ready:', output, file.size, 'bytes');
+} finally {
+  if (recorder && recorder.exitCode === null) recorder.kill('SIGINT');
+  await browser.close();
 }
-await browser.close();
-const ff=spawnSync('ffmpeg',['-y','-framerate',String(fps),'-i','output/frames/%05d.png','-c:v','libx264','-preset','medium','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart','output/sushi-ten-bento-cinematico.mp4'],{stdio:'inherit'});
-if(ff.status!==0)throw Error('FFmpeg failed');
-await rm('output/frames',{recursive:true,force:true});
-console.log('Video listo.');
