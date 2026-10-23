@@ -7,3 +7,6 @@
 .hero-title-image{display:block;width:min(100%,650px);height:auto;object-fit:contain;object-position:left center}.hero-title-fallback{display:block}@media(max-width:600px){.hero-title-image{width:min(100%,480px)}}
 
 .brand-logo-image{display:block;width:clamp(205px,21vw,310px);max-height:72px;height:auto;object-fit:contain;object-position:left center}@media(max-width:900px){.brand-logo-image{width:clamp(180px,28vw,245px);max-height:58px}}@media(max-width:600px){.brand-logo-image{width:190px;max-height:52px}}
+
+/* Four separately positioned illustrations from one transparent sprite */
+.feature-icon{display:block;flex:none;width:64px;height:64px;background-image:url('/sushi-ten-bento-/images/sushi-ten-bento-iconos.png');background-size:400% 100%;background-repeat:no-repeat;transition:transform .35s ease,filter .35s ease}.feature-icon-0{background-position:0% center}.feature-icon-1{background-position:33.333% center}.feature-icon-2{background-position:66.667% center}.feature-icon-3{background-position:100% center}.feature:hover .feature-icon{transform:translateY(-4px);filter:brightness(1.15)}@media(max-width:900px){.feature-icon{width:52px;height:52px}}@media(max-width:600px){.feature-icon{width:46px;height:46px}}
