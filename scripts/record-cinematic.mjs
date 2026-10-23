@@ -34,8 +34,16 @@ try {
     for (const img of document.images) if (img.loading === 'lazy') img.loading = 'eager';
     document.documentElement.style.scrollBehavior = 'auto';
   });
+  // Recording-only preview: keep the actual public catalog unchanged.
+  // Show only four cards so the film reaches the gallery quickly and naturally.
+  await page.addStyleTag({content: `
+    .experience-card:nth-child(n+5){display:none!important}
+    .experience-grid{align-content:start!important}
+  `});
   await page.waitForTimeout(2500);
 
+  const visibleCards = await page.locator('.experience-card:visible').count();
+  console.log('Catalog cards visible in recording:', visibleCards);
   const total = await page.evaluate(() => Math.max(0, document.documentElement.scrollHeight - innerHeight));
   console.log('Real-time recording:', duration, 'seconds, scroll distance:', total, 'px');
 
