@@ -186,3 +186,36 @@
 .experience-more-list button:hover,.experience-more-list button:focus-visible,.experience-more-list button.is-active{background:#42202a;color:white}
 .experience-more-list button span{color:#d58379}
 @media(max-width:760px){.experience-category-bar{align-items:stretch;gap:8px}.experience-category-bar .experience-tab{padding:11px 13px;font-size:13px}.experience-more-trigger{padding:11px 12px;font-size:13px}.experience-more-list{right:0}}
+
+/* Cinematic sushi gallery V2: the existing 18 images, not enlarged crops */
+.experience-toolbar{max-width:1400px;margin:-5px auto 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.experience-count{font-size:11px;letter-spacing:.16em;color:#bd9a83;text-transform:uppercase}.experience-count span{color:#a53e4c;margin:0 6px}
+.experience-search{display:flex;align-items:center;gap:9px;border:1px solid #67453e;border-radius:30px;background:#1a1111;color:#e6b39c;padding:8px 15px;min-width:200px}
+.experience-search>span{font-size:23px;line-height:1}.experience-search input{border:0;outline:0;background:transparent;color:#fff0e2;font:13px inherit;width:100%;min-width:0}.experience-search:focus-within{border-color:#ff6272;box-shadow:0 0 0 2px #ff375020}
+.experience-grid{perspective:1000px;align-content:start}
+.experience-card{transform:perspective(850px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;isolation:isolate;will-change:auto;background:linear-gradient(145deg,#251716,#100a0b);box-shadow:0 16px 32px #0006;min-height:265px}
+.experience-card:hover{transform:perspective(850px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-5px);box-shadow:0 17px 34px #000a,0 0 25px #ff425329}
+.experience-card::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:4;opacity:0;background:radial-gradient(ellipse at var(--mx,50%) var(--my,50%),#fff3 0%,transparent 52%);transition:opacity .3s}
+.experience-card:hover::after{opacity:1}
+.experience-card.is-active{box-shadow:0 0 0 1px #ff5268,0 0 24px #ff34585e,0 14px 30px #0008}
+.experience-card-image{height:195px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 65%,#6e292b5e 0%,#180e0f 65%);isolation:isolate}
+.experience-card-image::before{content:"";position:absolute;inset:10% 16%;border-radius:50%;background:radial-gradient(ellipse,#ff5b6930,transparent 67%);filter:blur(15px)}
+.experience-card-image img{width:100%;height:100%;object-fit:contain;position:relative;z-index:1;filter:contrast(1.07) saturate(1.08) drop-shadow(0 14px 11px #0008);transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .3s}
+.experience-card:hover .experience-card-image img,.experience-card.is-active .experience-card-image img{transform:scale(1.075) translateY(-3px);filter:contrast(1.09) saturate(1.13) drop-shadow(0 18px 15px #000b)}
+.experience-card-index{position:absolute;top:12px;left:13px;font:12px Georgia,serif;letter-spacing:.14em;color:#efd0ad;z-index:2;text-shadow:0 1px 8px #000}
+.experience-card-body{z-index:2;background:linear-gradient(180deg,#1a1011,#120c0c);border-top:1px solid #4e2e2a}
+.experience-card.is-active .experience-card-body{border-top-color:#c24650}
+.experience-spotlight{isolation:isolate;background:radial-gradient(ellipse at 50% 38%,#74262b45,transparent 60%),linear-gradient(155deg,#201214,#0c090a);box-shadow:inset 0 0 50px #0006,0 24px 50px #0007}
+.experience-spotlight-counter{float:right;font:13px Georgia,serif;letter-spacing:.15em;color:#ae7f69}
+.experience-spotlight-art{height:320px;position:relative;display:grid;place-items:center;isolation:isolate;background:none;transform:none;filter:none;animation:none;margin:12px -10px 15px}
+.experience-spotlight-art::before{content:"";position:absolute;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#8e2e3c54,transparent 66%);filter:blur(13px);animation:experiencePulse 5s ease-in-out infinite}
+.experience-spotlight-art::after{content:"";position:absolute;bottom:8%;width:62%;height:13%;border-radius:50%;background:#000b;filter:blur(15px);z-index:-1;animation:experienceShadow 5s ease-in-out infinite}
+.experience-spotlight-art img{position:relative;z-index:2;width:100%;height:100%;object-fit:contain;filter:contrast(1.09) saturate(1.1) drop-shadow(0 17px 14px #000b);animation:experienceDishFloat 5s ease-in-out infinite}
+.experience-orbit{z-index:0;inset:8% 16%;border-color:#d28d624f;box-shadow:0 0 22px #d35b4220,inset 0 0 18px #d35b4218;animation:experienceOrbit 16s linear infinite}
+.experience-spotlight-glow{position:absolute;z-index:1;inset:15%;pointer-events:none;border-radius:50%;box-shadow:0 0 48px #dd2f4433}
+@keyframes experienceDishFloat{0%,100%{transform:translateY(0) rotate(-1deg) scale(.96)}50%{transform:translateY(-11px) rotate(1deg) scale(1)}}
+@keyframes experienceShadow{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(.83);opacity:.55}}
+@keyframes experiencePulse{0%,100%{opacity:.65;transform:scale(.95)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes experienceOrbit{to{transform:rotate(340deg)}}
+@media(max-width:600px){.experience-toolbar{flex-wrap:wrap}.experience-search{min-width:155px;flex:1;max-width:260px}.experience-card-image{height:145px}.experience-card{min-height:225px}.experience-spotlight-art{height:260px}.experience-card-index{top:8px;left:9px}}
+@media(prefers-reduced-motion:reduce){.experience-card,.experience-card-image img,.experience-spotlight-art img,.experience-orbit,.experience-spotlight-art::before,.experience-spotlight-art::after{animation:none!important;transition:none!important;transform:none!important}}
