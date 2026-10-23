@@ -138,3 +138,24 @@
 .menu-showcase-kanji strong{font-size:76px;font-weight:400;line-height:1}.menu-showcase-kanji span{writing-mode:vertical-rl;letter-spacing:.26em;font-size:19px}
 @media(max-width:900px){.menu-showcase,.menu-showcase-inner{min-height:530px}.menu-showcase-inner{padding:90px 35px}.menu-showcase-copy{max-width:75%}.menu-showcase-kanji{left:auto;right:9%;top:28%}.menu-showcase-kanji strong{font-size:55px}}
 @media(max-width:600px){.menu-showcase,.menu-showcase-inner{min-height:540px}.menu-showcase::before{background-position:65% center}.menu-showcase::after{background:linear-gradient(180deg,#0b0808 0%,rgba(11,8,8,.42) 75px,rgba(5,3,3,.67) 100%)}.menu-showcase-inner{padding:95px 25px 65px;align-items:flex-start}.menu-showcase-copy{max-width:100%;position:relative;z-index:2}.menu-showcase-copy h2{font-size:clamp(48px,11vw,67px)}.menu-showcase-copy>p:not(.menu-showcase-kicker){font-size:21px;max-width:340px}.menu-showcase-kicker{font-size:13px;gap:10px}.menu-showcase-line{width:45px}.menu-showcase-kicker>span:last-child{font-size:13px}.menu-showcase-kanji{display:none}}
+
+/* Menu headline: continuous ivory -> champagne -> coral -> crimson gradient matching reference */
+.menu-showcase-copy h2{
+  color:#f6e7cf;
+  background:linear-gradient(105deg,#fff5de 0%,#f6dfbd 29%,#f1bd9d 52%,#e87572 74%,#bb233e 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:none;
+}
+.menu-showcase-copy h2 em{
+  color:inherit;
+  -webkit-text-fill-color:inherit;
+}
+@media(max-width:600px){
+  .menu-showcase-copy h2{
+    background:linear-gradient(110deg,#fff4dd 0%,#f0d2b2 38%,#e58d83 69%,#c42d46 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+  }
+}
