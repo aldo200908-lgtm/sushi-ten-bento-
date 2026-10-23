@@ -1,0 +1,34 @@
+name: Grabar recorrido cinematografico
+on:
+  workflow_dispatch:
+    inputs:
+      duration:
+        description: 'Duracion del video en segundos'
+        required: true
+        default: '45'
+        type: choice
+        options: ['30','45','60']
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar navegador y herramientas
+        run: |
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Grabar video Full HD
+        env:
+          DURATION: ${{ inputs.duration }}
+        run: node scripts/record-cinematic.mjs
+      - name: Guardar MP4 para descargar
+        uses: actions/upload-artifact@v4
+        with:
+          name: sushi-ten-bento-video-1080p
+          path: output/sushi-ten-bento-cinematico.mp4
+          retention-days: 7
